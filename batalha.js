@@ -6,29 +6,42 @@ let derrotas = 0;
 
 let my = {
     nome: "charmander",
-    vida: 120,
-    ataque: 20,
+    vida: 167,
+    ataque: 30,
     critico: 0.2
 };
 
 let ini = {
     nome: "bulbassauro",
     vida: 120,
-    ataque: 40,
+    ataque: 67,
     critico: 0.2
 };
 
+function atualizarTela() {
+    document.getElementById("vida-jogador").textContent = vidamy;
+    document.getElementById("vida-inimigo").textContent = vidaini;
+    document.getElementById("rodada").textContent = rodada;
+    document.getElementById("vitorias").textContent = vitorias;
+    document.getElementById("derrotas").textContent = derrotas;
+
+    document.getElementById("botao-atacar").disabled =
+        vidaini === 0 || vidamy === 0;
+}
+
 function atacar() {
     if (vidaini === 0 || vidamy === 0) {
-        console.log("The battle is over!");
-        return vidaini;
+        return;
     }
 
+    rodada++;
+
     let dano = Math.floor(Math.random() * 21) + my.ataque;
+    let mensagem = "";
 
     if (Math.random() < my.critico) {
         dano = dano * 2;
-        console.log("Critical hit!");
+        mensagem = "Critical hit! ";
     }
 
     vidaini = vidaini - dano;
@@ -37,19 +50,17 @@ function atacar() {
         vidaini = 0;
     }
 
-    console.log("You dealt", dano, "damage!");
+    mensagem += `You dealt ${dano} damage! `;
 
     if (vidaini === 0) {
         vitorias++;
-        console.log("You win!");
-    }
-
-    if (vidaini > 0) {
+        mensagem += "You win!";
+    } else {
         let danoini = Math.floor(Math.random() * 21) + ini.ataque;
 
         if (Math.random() < ini.critico) {
             danoini = danoini * 2;
-            console.log("Enemy critical hit!");
+            mensagem += "Enemy critical hit! ";
         }
 
         vidamy = vidamy - danoini;
@@ -58,16 +69,17 @@ function atacar() {
             vidamy = 0;
         }
 
-        console.log("The enemy dealt", danoini, "damage!");
-        console.log("Your health:", vidamy);
+        mensagem += `The enemy dealt ${danoini} damage! `;
 
         if (vidamy === 0) {
             derrotas++;
-            console.log("You lost!");
+            mensagem += "You lost!";
         }
     }
 
-    return vidaini;
+
+    document.getElementById("mensagem").textContent = mensagem;
+    atualizarTela();
 }
 
 function reiniciar() {
@@ -75,35 +87,14 @@ function reiniciar() {
     vidamy = my.vida;
     rodada = 0;
 
-    console.log("New battle!");
-    console.log("Ready to fight!");
-    console.log(my.nome, "vs", ini.nome);
-}
+    document.getElementById("mensagem").textContent =
+        "Ready to fight!";
 
-function batalhar() {
-    while (vidaini > 0 && vidamy > 0) {
-        rodada++;
-        console.log("Round", rodada);
-        console.log("Enemy health remaining:", atacar());
+    atualizarTela();
+}
+    function zerarplacar() {
+        vitorias = 0
+        derrotas = 0
+        atualizarTela();
     }
-}
-
-for (let partida = 1; partida <= 5; partida++) {
-    console.log("Battle", partida);
-    reiniciar();
-    batalhar();
-}
-
-console.log("Wins:", vitorias);
-console.log("Losses:", derrotas);
-
-if (vitorias < 3) {
-    console.log("You lost the championship!");
-} else {
-    console.log("Champion!");
-}
-
-let batalhas = vitorias + derrotas;
-let porcento = (vitorias / batalhas) * 100;
-
-console.log("Win rate:", porcento.toFixed(1) + "%");
+reiniciar();

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokémon Battle</title>
+</head>
+<body>
+    <h1>Pokémon Battle</h1>
+
+    <h2>Charmander</h2>
+    <p>Health: <span id="vida-jogador">120</span></p>
+
+    <h2>Bulbasaur</h2>
+    <p>Health: <span id="vida-inimigo">120</span></p>
+
+    <p>Round: <span id="rodada">0</span></p>
+
+    <button id="botao-atacar" onclick="atacar()">Attack</button>
+    <button onclick="reiniciar()">New battle</button>
+    <button onclick="zerarplacar()">Reset score</button>
+
+    <p id="mensagem">Ready to fight!</p>
+
+    <p>Wins: <span id="vitorias">0</span></p>
+    <p>Losses: <span id="derrotas">0</span></p>
+
+    <script src="batalha.js"></script>
+</body>
+</html>
