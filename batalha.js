@@ -5,8 +5,8 @@ let vitorias = 0;
 let derrotas = 0;
 
 let my = {
-    nome: "charmander",
-    vida: 167,
+    nome: "charizard",
+    vida: 120,
     ataque: 30,
     critico: 0.2
 };
@@ -24,6 +24,10 @@ function atualizarTela() {
     document.getElementById("rodada").textContent = rodada;
     document.getElementById("vitorias").textContent = vitorias;
     document.getElementById("derrotas").textContent = derrotas;
+    document.getElementById("nome-jogador").textContent = my.nome;
+    document.getElementById("nome-inimigo").textContent = ini.nome;
+    document.getElementById("barra-jogador").max = my.vida;
+    document.getElementById("barra-jogador").value = vidamy;document.getElementById("barra-inimigo").max = ini.vida;document.getElementById("barra-inimigo").value = vidaini;
 
     document.getElementById("botao-atacar").disabled =
         vidaini === 0 || vidamy === 0;

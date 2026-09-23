@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Battle</title>
+    <link rel="stylesheet" href="stayle.css">
 </head>
 <body>
     <h1>Pokémon Battle</h1>
 
-    <h2>Charmander</h2>
+    <h2 id="nome-jogador">charminion</h2>
     <p>Health: <span id="vida-jogador">120</span></p>
+    <progress id="barra-jogador" value="120" max="120"></progress>
 
-    <h2>Bulbasaur</h2>
+    <h2 id="nome-inimigo">Bulbasaur</h2>
     <p>Health: <span id="vida-inimigo">120</span></p>
+    <progress id="barra-inimigo" value="120" max="120"></progress>
 
     <p>Round: <span id="rodada">0</span></p>
 
